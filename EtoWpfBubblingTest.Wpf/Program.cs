@@ -14,8 +14,6 @@ namespace EtoWpfBubblingTest.Desktop
 
     public class NodeWindowsFormsHostHandler : Eto.Wpf.Forms.WindowsFormsHostHandler<System.Windows.Forms.Control, NodeWindowsFormsHost, NodeWindowsFormsHost.ICallback>, NodeWindowsFormsHost.IHandler
     {
-        public IntPtr IntegrationHandle => WinFormsControl.Handle;
-
         public NodeWindowsFormsHostHandler() : base(new System.Windows.Forms.Control())
         {
             Control.KeyDown += Control_KeyDown;

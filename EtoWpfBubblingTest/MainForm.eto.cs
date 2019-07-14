@@ -6,11 +6,10 @@ namespace EtoWpfBubblingTest
 {
     partial class MainForm : Form
     {
-        private Button btnMove = new Button { Text = "Move node" };
-        private TextBox tbxMoveX = new TextBox();
-        private TextBox tbxMoveY = new TextBox();
-        private Label lblLocation = new Label { Text = "Node location:", VerticalAlignment = VerticalAlignment.Bottom, Height = 25 };
-        private TextBox tbxLocation = new TextBox();
+        private RadioButton rdoCheckBox;
+        private RadioButton rdoPanel;
+        private RadioButton rdoWindowsFormsHost;
+
         private PixelLayout pxlViewport = new PixelLayout { BackgroundColor = Colors.Green, Size = new Size(100, 100) };
 
         private NodeCheckBox nodeCheckBox = new NodeCheckBox { Size = new Size(100, 100), BackgroundColor = Colors.Cyan };
@@ -21,6 +20,10 @@ namespace EtoWpfBubblingTest
         {
             Title = "EtoWpfBubblingTest";
             ClientSize = new Size(400, 350);
+
+            rdoCheckBox = new RadioButton { Text = "NodeCheckBox" };
+            rdoPanel = new RadioButton(rdoCheckBox) { Text = "NodePanel" };
+            rdoWindowsFormsHost = new RadioButton(rdoCheckBox) { Text = "NodeWindowsFormsHost" };
 
             Content = new TableLayout()
             {
@@ -33,14 +36,11 @@ namespace EtoWpfBubblingTest
                         {
                             new StackLayout
                             {
-                                Width = 137,
                                 Items =
                                 {
-                                    btnMove,
-                                    tbxMoveX,
-                                    tbxMoveY,
-                                    lblLocation,
-                                    tbxLocation
+                                    rdoCheckBox,
+                                    rdoPanel,
+                                    rdoWindowsFormsHost
                                 }
                             },
                             pxlViewport
@@ -49,11 +49,29 @@ namespace EtoWpfBubblingTest
                 }
             };
 
-            //pxlViewport.Add(nodeCheckBox, 0, 0);
-            //pxlViewport.Add(nodePanel, 0, 0);
-            pxlViewport.Add(nodeWindowsFormsHost, 0, 0);
+            rdoCheckBox.CheckedChanged += ChangeNodeType;
+            rdoPanel.CheckedChanged += ChangeNodeType;
+            rdoWindowsFormsHost.CheckedChanged += ChangeNodeType;
 
             pxlViewport.MouseDown += PxlViewport_MouseDown;
+        }
+
+        private void ChangeNodeType(object sender, EventArgs e)
+        {
+            pxlViewport.RemoveAll();
+
+            if (rdoCheckBox.Checked)
+            {
+                pxlViewport.Add(nodeCheckBox, 0, 0);
+            }
+            else if (rdoPanel.Checked)
+            {
+                pxlViewport.Add(nodePanel, 0, 0);
+            }
+            else if (rdoWindowsFormsHost.Checked)
+            {
+                pxlViewport.Add(nodeWindowsFormsHost, 0, 0);
+            }
         }
 
         private void PxlViewport_MouseDown(object sender, MouseEventArgs e)
