@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtoWpfBubblingTest", "EtoWpfBubblingTest\EtoWpfBubblingTest.csproj", "{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtoWpfBubblingTest", "EtoWpfBubblingTest\EtoWpfBubblingTest.csproj", "{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtoWpfBubblingTest.Wpf", "EtoWpfBubblingTest.Wpf\EtoWpfBubblingTest.Wpf.csproj", "{76384F0E-F56F-4DDB-BB09-08EABA439F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtoWpfBubblingTest.Wpf", "EtoWpfBubblingTest.Wpf\EtoWpfBubblingTest.Wpf.csproj", "{76384F0E-F56F-4DDB-BB09-08EABA439F24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtoWpfBubblingTest.WinForms", "EtoWpfBubblingTest.WinForms\EtoWpfBubblingTest.WinForms.csproj", "{5B255659-4D4C-4AD8-BE1E-48DB8BEF4DDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,20 +15,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94DA3CCC-222F-48A7-91FD-4F7CE1945D92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E894D574-A6CA-49DA-8AB6-7DF9F2FD99E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E894D574-A6CA-49DA-8AB6-7DF9F2FD99E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E894D574-A6CA-49DA-8AB6-7DF9F2FD99E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E894D574-A6CA-49DA-8AB6-7DF9F2FD99E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76384F0E-F56F-4DDB-BB09-08EABA439F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B255659-4D4C-4AD8-BE1E-48DB8BEF4DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B255659-4D4C-4AD8-BE1E-48DB8BEF4DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B255659-4D4C-4AD8-BE1E-48DB8BEF4DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B255659-4D4C-4AD8-BE1E-48DB8BEF4DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDCDF018-955D-43F7-A5F0-0F2F20524E62}
 	EndGlobalSection
 EndGlobal

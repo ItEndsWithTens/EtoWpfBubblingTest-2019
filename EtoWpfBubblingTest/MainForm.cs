@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Eto.Forms;
-using Eto.Drawing;
+﻿using Eto.Forms;
 
 namespace EtoWpfBubblingTest
 {

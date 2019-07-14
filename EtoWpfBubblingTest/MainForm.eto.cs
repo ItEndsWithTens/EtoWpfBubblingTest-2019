@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Eto.Drawing;
 using Eto.Forms;
-using Eto.Drawing;
+using System;
 
 namespace EtoWpfBubblingTest
 {
@@ -18,12 +18,12 @@ namespace EtoWpfBubblingTest
 
         void InitializeComponent()
         {
-            Title = "EtoWpfBubblingTest";
+            Title = $"EtoWpfBubblingTest - Platform: {Eto.Platform.Instance.ID}";
             ClientSize = new Size(400, 350);
 
-            rdoCheckBox = new RadioButton { Text = "NodeCheckBox" };
-            rdoPanel = new RadioButton(rdoCheckBox) { Text = "NodePanel" };
-            rdoWindowsFormsHost = new RadioButton(rdoCheckBox) { Text = "NodeWindowsFormsHost" };
+            rdoWindowsFormsHost = new RadioButton { Text = "NodeWindowsFormsHost" };
+            rdoPanel = new RadioButton(rdoWindowsFormsHost) { Text = "NodePanel" };
+            rdoCheckBox = new RadioButton(rdoWindowsFormsHost) { Text = "NodeCheckBox" };
 
             Content = new TableLayout()
             {
@@ -53,7 +53,7 @@ namespace EtoWpfBubblingTest
             rdoPanel.CheckedChanged += ChangeNodeType;
             rdoWindowsFormsHost.CheckedChanged += ChangeNodeType;
 
-            pxlViewport.MouseDown += PxlViewport_MouseDown;
+            rdoWindowsFormsHost.Checked = true;
         }
 
         private void ChangeNodeType(object sender, EventArgs e)
@@ -72,11 +72,6 @@ namespace EtoWpfBubblingTest
             {
                 pxlViewport.Add(nodeWindowsFormsHost, 0, 0);
             }
-        }
-
-        private void PxlViewport_MouseDown(object sender, MouseEventArgs e)
-        {
-            Title = e.Location.ToString();
         }
     }
 }

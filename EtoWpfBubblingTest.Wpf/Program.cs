@@ -1,8 +1,7 @@
-﻿using System;
-using Eto;
-using Eto.Forms;
+﻿using Eto.Forms;
+using System;
 
-namespace EtoWpfBubblingTest.Desktop
+namespace EtoWpfBubblingTest.Wpf
 {
     public class NodeCheckBoxHandler : Eto.Wpf.Forms.Controls.CheckBoxHandler
     {
