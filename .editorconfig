@@ -1,0 +1,14 @@
+root = true
+
+[*]
+
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.cs]
+
+indent_style = tab
+
+csharp_prefer_braces = true
+
+csharp_new_line_before_open_brace = all
