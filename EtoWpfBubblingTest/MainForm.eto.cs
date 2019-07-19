@@ -19,7 +19,7 @@ namespace EtoWpfBubblingTest
 		void InitializeComponent()
 		{
 			Title = $"EtoWpfBubblingTest - Platform: {Eto.Platform.Instance.ID}";
-			ClientSize = new Size(400, 350);
+			ClientSize = new Size(800, 350);
 
 			rdoWindowsFormsHost = new RadioButton { Text = "NodeWindowsFormsHost" };
 			rdoPanel = new RadioButton(rdoWindowsFormsHost) { Text = "NodePanel" };

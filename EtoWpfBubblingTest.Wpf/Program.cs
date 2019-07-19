@@ -1,5 +1,7 @@
 ﻿using Eto.Forms;
 using System;
+using swf = System.Windows.Forms;
+using swi = System.Windows.Input;
 
 namespace EtoWpfBubblingTest.Wpf
 {
@@ -11,9 +13,9 @@ namespace EtoWpfBubblingTest.Wpf
 	{
 	}
 
-	public class NodeWindowsFormsHostHandler : Eto.Wpf.Forms.WindowsFormsHostHandler<System.Windows.Forms.Control, NodeWindowsFormsHost, NodeWindowsFormsHost.ICallback>, NodeWindowsFormsHost.IHandler
+	public class NodeWindowsFormsHostHandler : Eto.Wpf.Forms.CustomizedWindowsFormsHostHandler<swf.Control, NodeWindowsFormsHost, NodeWindowsFormsHost.ICallback>, NodeWindowsFormsHost.IHandler
 	{
-		public NodeWindowsFormsHostHandler() : base(new System.Windows.Forms.Control())
+		public NodeWindowsFormsHostHandler() : base(new swf.Control())
 		{
 			Control.KeyDown += Control_KeyDown;
 			Control.MouseDown += Control_MouseDown;
@@ -22,29 +24,14 @@ namespace EtoWpfBubblingTest.Wpf
 			WinFormsControl.MouseDown += WinFormsControl_MouseDown;
 		}
 
-		private void Control_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		private void Control_KeyDown(object sender, swi.KeyEventArgs e)
 		{
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
 		}
-		private void Control_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
-		}
-
-		private void WinFormsControl_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
-		}
-		private void WinFormsControl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+		private void Control_MouseDown(object sender, swi.MouseButtonEventArgs e)
 		{
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
@@ -52,6 +39,20 @@ namespace EtoWpfBubblingTest.Wpf
 			}
 		}
 
+		private void WinFormsControl_KeyDown(object sender, swf.KeyEventArgs e)
+		{
+			if (System.Diagnostics.Debugger.IsAttached)
+			{
+				System.Diagnostics.Debugger.Break();
+			}
+		}
+		private void WinFormsControl_MouseDown(object sender, swf.MouseEventArgs e)
+		{
+			if (System.Diagnostics.Debugger.IsAttached)
+			{
+				System.Diagnostics.Debugger.Break();
+			}
+		}
 	}
 
 	public class Program

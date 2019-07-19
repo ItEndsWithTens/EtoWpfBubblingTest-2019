@@ -10,20 +10,22 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			base.OnKeyDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnKeyDown(e);
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			base.OnMouseDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnMouseDown(e);
 		}
 	}
 
@@ -34,20 +36,22 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			base.OnKeyDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnKeyDown(e);
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			base.OnMouseDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnMouseDown(e);
 		}
 	}
 
@@ -58,20 +62,22 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			base.OnKeyDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnKeyDown(e);
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			base.OnMouseDown(e);
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			base.OnMouseDown(e);
 		}
 	}
 }
