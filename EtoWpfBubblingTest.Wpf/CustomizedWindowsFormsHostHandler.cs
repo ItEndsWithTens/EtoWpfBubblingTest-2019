@@ -48,7 +48,7 @@ namespace Eto.Wpf.Forms
 				button |= swi.MouseButton.Right;
 			}
 
-			return new swi.MouseButtonEventArgs(swi.Mouse.PrimaryDevice, 0, button);
+			return new swi.MouseButtonEventArgs(swi.InputManager.Current.PrimaryMouseDevice, Environment.TickCount, button);
 		}
 
 		public static swi.MouseButton? ToWpf(this swf.MouseButtons winformsButton)
