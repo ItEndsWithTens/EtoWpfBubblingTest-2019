@@ -291,11 +291,7 @@ namespace Eto.Wpf.Forms
 
 		void WinFormsControl_LostFocus(object sender, EventArgs e) => Callback.OnLostFocus(Widget, EventArgs.Empty);
 
-		void WinFormsControl_GotFocus(object sender, EventArgs e)
-		{
-			swi.Mouse.Capture(Control);
-			Callback.OnGotFocus(Widget, EventArgs.Empty);
-		}
+		void WinFormsControl_GotFocus(object sender, EventArgs e) => Callback.OnGotFocus(Widget, EventArgs.Empty);
 
 		public override void Focus()
 		{
