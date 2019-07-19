@@ -93,7 +93,7 @@ namespace Eto.Wpf.Forms
 			where TCallback : Control.ICallback
 	{
 		public override bool UseKeyPreview => true;
-		public override bool UseMousePreview => false;
+		public override bool UseMousePreview => true;
 
 		public override Color BackgroundColor
 		{
