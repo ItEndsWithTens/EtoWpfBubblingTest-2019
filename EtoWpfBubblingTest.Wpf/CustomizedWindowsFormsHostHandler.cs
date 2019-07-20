@@ -92,8 +92,8 @@ namespace Eto.Wpf.Forms
 			where TWidget : Control
 			where TCallback : Control.ICallback
 	{
-		public override bool UseKeyPreview => false;
-		public override bool UseMousePreview => false;
+		public override bool UseKeyPreview => true;
+		public override bool UseMousePreview => true;
 
 		public override Color BackgroundColor
 		{
@@ -129,8 +129,8 @@ namespace Eto.Wpf.Forms
 					WinFormsControl.MouseUp += WinFormsControl_MouseUp;
 					break;
 				case Eto.Forms.Control.MouseDownEvent:
+					Control.MouseDown += Control_MouseDown;
 					WinFormsControl.MouseDown += WinFormsControl_MouseDown;
-					base.AttachEvent(id);
 					break;
 				case Eto.Forms.Control.MouseDoubleClickEvent:
 					WinFormsControl.MouseDoubleClick += WinFormsControl_MouseDoubleClick;
@@ -145,9 +145,9 @@ namespace Eto.Wpf.Forms
 					WinFormsControl.MouseWheel += WinFormsControl_MouseWheel;
 					break;
 				case Eto.Forms.Control.KeyDownEvent:
+					Control.KeyDown += Control_KeyDown;
 					WinFormsControl.KeyDown += WinFormsControl_KeyDown;
 					WinFormsControl.KeyPress += WinFormsControl_KeyPress;
-					base.AttachEvent(id);
 					break;
 				case Eto.Forms.Control.KeyUpEvent:
 					WinFormsControl.KeyUp += WinFormsControl_KeyUp;
@@ -168,6 +168,13 @@ namespace Eto.Wpf.Forms
 					base.AttachEvent(id);
 					break;
 			}
+		}
+
+		private void Control_KeyDown(object sender, swi.KeyEventArgs e)
+		{
+			Keys keys = e.Key.ToEtoWithModifier(e.KeyboardDevice.Modifiers);
+
+			Callback.OnKeyDown(Widget, new KeyEventArgs(keys, KeyEventType.KeyDown));
 		}
 
 		Keys key;
@@ -256,12 +263,15 @@ namespace Eto.Wpf.Forms
 
 		void WinFormsControl_MouseDoubleClick(object sender, swf.MouseEventArgs e) => Callback.OnMouseDoubleClick(Widget, e.ToEto(WinFormsControl));
 
+		void Control_MouseDown(object sender, swi.MouseButtonEventArgs e) => Callback.OnMouseDown(Widget, e.ToEto(Control));
 		void WinFormsControl_MouseDown(object sender, swf.MouseEventArgs e)
 		{
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				System.Diagnostics.Debugger.Break();
 			}
+
+			Control.CaptureMouse();
 
 			MouseEventArgs eto = e.ToEto(WinFormsControl);
 
