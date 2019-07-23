@@ -22,18 +22,27 @@ namespace EtoWpfBubblingTest
 
 			e.Handled = true;
 		}
+
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseDown");
 
 			base.OnMouseDown(e);
 
 			Title = $"MouseDown! Buttons: {e.Buttons}, Modifiers: {e.Modifiers}, Location: {e.Location}";
+		}
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseUp");
 
-			e.Handled = true;
+			base.OnMouseUp(e);
+		}
+
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseMove");
+
+			base.OnMouseMove(e);
 		}
 	}
 }

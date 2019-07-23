@@ -1,5 +1,6 @@
 ﻿using Eto;
 using Eto.Forms;
+using System;
 
 namespace EtoWpfBubblingTest
 {
@@ -70,14 +71,36 @@ namespace EtoWpfBubblingTest
 			base.OnKeyDown(e);
 		}
 
+		bool dragging = false;
+
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseDown");
+
+			dragging = true;
 
 			base.OnMouseDown(e);
+		}
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseUp");
+
+			dragging = false;
+
+			base.OnMouseUp(e);
+		}
+
+		Random random = new Random();
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseMove");
+
+			base.OnMouseMove(e);
+
+			if (dragging)
+			{
+				BackgroundColor = new Eto.Drawing.Color((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+			}
 		}
 	}
 }

@@ -92,8 +92,8 @@ namespace Eto.Wpf.Forms
 			where TWidget : Control
 			where TCallback : Control.ICallback
 	{
-		public override bool UseKeyPreview => true;
-		public override bool UseMousePreview => true;
+		public override bool UseKeyPreview => false;
+		public override bool UseMousePreview => false;
 
 		public override Color BackgroundColor
 		{
@@ -124,13 +124,15 @@ namespace Eto.Wpf.Forms
 			{
 				case Eto.Forms.Control.MouseMoveEvent:
 					WinFormsControl.MouseMove += WinFormsControl_MouseMove;
+					base.AttachEvent(id);
 					break;
 				case Eto.Forms.Control.MouseUpEvent:
 					WinFormsControl.MouseUp += WinFormsControl_MouseUp;
+					base.AttachEvent(id);
 					break;
 				case Eto.Forms.Control.MouseDownEvent:
-					Control.MouseDown += Control_MouseDown;
 					WinFormsControl.MouseDown += WinFormsControl_MouseDown;
+					base.AttachEvent(id);
 					break;
 				case Eto.Forms.Control.MouseDoubleClickEvent:
 					WinFormsControl.MouseDoubleClick += WinFormsControl_MouseDoubleClick;
@@ -263,14 +265,14 @@ namespace Eto.Wpf.Forms
 
 		void WinFormsControl_MouseDoubleClick(object sender, swf.MouseEventArgs e) => Callback.OnMouseDoubleClick(Widget, e.ToEto(WinFormsControl));
 
-		void Control_MouseDown(object sender, swi.MouseButtonEventArgs e) => Callback.OnMouseDown(Widget, e.ToEto(Control));
 		void WinFormsControl_MouseDown(object sender, swf.MouseEventArgs e)
 		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseDown");
 
+			// Contrary to most WPF controls, the WindowsFormsHost class seems
+			// to prevent correct mouse event data from being obtained (e.g.
+			// which buttons were pressed, and at what location). The solution
+			// is capturing the mouse long enough to build args...
 			Control.CaptureMouse();
 
 			MouseEventArgs eto = e.ToEto(WinFormsControl);
@@ -282,12 +284,45 @@ namespace Eto.Wpf.Forms
 				Source = Control
 			};
 
+			// ...but releasing it before continuing, in case the mouse event in
+			// question is one that shouldn't hold onto the mouse.
+			Control.ReleaseMouseCapture();
+
 			Control.RaiseEvent(args);
 		}
 
-		void WinFormsControl_MouseUp(object sender, swf.MouseEventArgs e) => Callback.OnMouseUp(Widget, e.ToEto(WinFormsControl));
+		void WinFormsControl_MouseUp(object sender, swf.MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseUp");
 
-		void WinFormsControl_MouseMove(object sender, swf.MouseEventArgs e) => Callback.OnMouseMove(Widget, e.ToEto(WinFormsControl));
+			Control.CaptureMouse();
+
+			MouseEventArgs eto = e.ToEto(WinFormsControl);
+
+			swi.MouseButton changed = eto.ToWpf().ChangedButton;
+			var args = new swi.MouseButtonEventArgs(swi.InputManager.Current.PrimaryMouseDevice, Environment.TickCount, changed)
+			{
+				RoutedEvent = swi.Mouse.MouseUpEvent,
+				Source = Control
+			};
+
+			Control.ReleaseMouseCapture();
+
+			Control.RaiseEvent(args);
+		}
+
+		void WinFormsControl_MouseMove(object sender, swf.MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseMove");
+
+			var args = new swi.MouseEventArgs(swi.InputManager.Current.PrimaryMouseDevice, Environment.TickCount)
+			{
+				RoutedEvent = swi.Mouse.MouseMoveEvent,
+				Source = Control
+			};
+
+			Control.RaiseEvent(args);
+		}
 
 		void WinFormsControl_LostFocus(object sender, EventArgs e) => Callback.OnLostFocus(Widget, EventArgs.Empty);
 

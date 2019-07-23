@@ -17,41 +17,6 @@ namespace EtoWpfBubblingTest.Wpf
 	{
 		public NodeWindowsFormsHostHandler() : base(new swf.Control())
 		{
-			Control.KeyDown += Control_KeyDown;
-			Control.MouseDown += Control_MouseDown;
-
-			WinFormsControl.KeyDown += WinFormsControl_KeyDown;
-			WinFormsControl.MouseDown += WinFormsControl_MouseDown;
-		}
-
-		private void Control_KeyDown(object sender, swi.KeyEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
-		}
-		private void Control_MouseDown(object sender, swi.MouseButtonEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
-		}
-
-		private void WinFormsControl_KeyDown(object sender, swf.KeyEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
-		}
-		private void WinFormsControl_MouseDown(object sender, swf.MouseEventArgs e)
-		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
 		}
 	}
 
