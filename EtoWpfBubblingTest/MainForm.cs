@@ -44,5 +44,14 @@ namespace EtoWpfBubblingTest
 
 			base.OnMouseMove(e);
 		}
+
+		protected override void OnMouseWheel(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseWheel");
+
+			base.OnMouseWheel(e);
+
+			Title = $"MouseWheel! Delta: {e.Delta}";
+		}
 	}
 }

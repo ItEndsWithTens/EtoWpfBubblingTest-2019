@@ -144,6 +144,7 @@ namespace Eto.Wpf.Forms
 					WinFormsControl.MouseLeave += WinFormsControl_MouseLeave;
 					break;
 				case Eto.Forms.Control.MouseWheelEvent:
+					Control.MouseWheel += Control_MouseWheel;
 					WinFormsControl.MouseWheel += WinFormsControl_MouseWheel;
 					break;
 				case Eto.Forms.Control.KeyDownEvent:
@@ -170,6 +171,27 @@ namespace Eto.Wpf.Forms
 					base.AttachEvent(id);
 					break;
 			}
+		}
+
+		private void Control_MouseWheel(object sender, swi.MouseWheelEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("Control_MouseWheel");
+
+			// To ensure all involved overrides are called in the right order,
+			// call the callback, consider the event handled, and then tell WPF
+			// to continue on its merry way with the Preview version instead.
+
+			Callback.OnMouseWheel(Widget, e.ToEto(Control));
+
+			e.Handled = true;
+
+			var args = new swi.MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+			{
+				RoutedEvent = swi.Mouse.PreviewMouseWheelEvent,
+				Source = e.Source
+			};
+
+			Control.RaiseEvent(args);
 		}
 
 		private void Control_KeyDown(object sender, swi.KeyEventArgs e)
@@ -257,7 +279,18 @@ namespace Eto.Wpf.Forms
 			}
 		}
 
-		void WinFormsControl_MouseWheel(object sender, swf.MouseEventArgs e) => Callback.OnMouseWheel(Widget, e.ToEto(WinFormsControl));
+		void WinFormsControl_MouseWheel(object sender, swf.MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseWheel");
+
+			var args = new swi.MouseWheelEventArgs(swi.InputManager.Current.PrimaryMouseDevice, Environment.TickCount, e.Delta)
+			{
+				RoutedEvent = swi.Mouse.MouseWheelEvent,
+				Source = Control
+			};
+
+			Control.RaiseEvent(args);
+		}
 
 		void WinFormsControl_MouseLeave(object sender, EventArgs e) => Callback.OnMouseLeave(Widget, new MouseEventArgs(Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
 

@@ -102,5 +102,23 @@ namespace EtoWpfBubblingTest
 				BackgroundColor = new Eto.Drawing.Color((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
 			}
 		}
+
+		protected override void OnMouseWheel(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseWheel");
+
+			if (e.Delta.Height > 0)
+			{
+				Width += 10;
+				Height += 10;
+			}
+			else if (e.Delta.Height < 0)
+			{
+				Width -= 10;
+				Height -= 10;
+			}
+
+			base.OnMouseWheel(e);
+		}
 	}
 }
