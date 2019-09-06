@@ -53,5 +53,26 @@ namespace EtoWpfBubblingTest
 
 			Title = $"MouseWheel! Delta: {e.Delta}";
 		}
+
+		// As per Microsoft docs, the UIElement.MouseEnter and MouseLeave events
+		// in WPF use direct routing, and shouldn't bubble. These two methods
+		// will as a result not catch a MouseEnter or Leave from the contained
+		// NodeWindowsFormsHost, but they're still useful to demonstrate when a
+		// cursor moves from the form to the control, or vice versa.
+		//
+		// https://docs.microsoft.com/en-us/dotnet/api/system.windows.uielement.mouseenter?view=netframework-4.8#remarks
+		//
+		protected override void OnMouseEnter(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseEnter");
+
+			base.OnMouseEnter(e);
+		}
+		protected override void OnMouseLeave(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseLeave");
+
+			base.OnMouseLeave(e);
+		}
 	}
 }

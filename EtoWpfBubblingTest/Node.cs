@@ -120,5 +120,18 @@ namespace EtoWpfBubblingTest
 
 			base.OnMouseWheel(e);
 		}
+
+		protected override void OnMouseEnter(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseEnter");
+
+			base.OnMouseEnter(e);
+		}
+		protected override void OnMouseLeave(MouseEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseLeave");
+
+			base.OnMouseLeave(e);
+		}
 	}
 }

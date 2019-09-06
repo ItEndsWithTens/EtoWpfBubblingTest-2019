@@ -292,9 +292,19 @@ namespace Eto.Wpf.Forms
 			Control.RaiseEvent(args);
 		}
 
-		void WinFormsControl_MouseLeave(object sender, EventArgs e) => Callback.OnMouseLeave(Widget, new MouseEventArgs(Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
+		void WinFormsControl_MouseLeave(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseLeave");
 
-		void WinFormsControl_MouseEnter(object sender, EventArgs e) => Callback.OnMouseEnter(Widget, new MouseEventArgs(Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
+			Callback.OnMouseLeave(Widget, new MouseEventArgs(Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
+		}
+
+		void WinFormsControl_MouseEnter(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseEnter");
+
+			Callback.OnMouseEnter(Widget, new MouseEventArgs(Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
+		}
 
 		void WinFormsControl_MouseDoubleClick(object sender, swf.MouseEventArgs e) => Callback.OnMouseDoubleClick(Widget, e.ToEto(WinFormsControl));
 
