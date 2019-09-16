@@ -11,14 +11,22 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
+			System.Diagnostics.Debug.WriteLine("MainForm.OnKeyDown");
 
 			base.OnKeyDown(e);
 
 			Title = $"KeyDown! Keys: {e.Key}, Modifiers: {e.Modifiers}";
+
+			e.Handled = true;
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("MainForm.OnKeyUp");
+
+			base.OnKeyUp(e);
+
+			Title = $"KeyUp! Keys: {e.Key}, Modifiers: {e.Modifiers}";
 
 			e.Handled = true;
 		}
@@ -40,7 +48,7 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("MainForm.OnMouseMove");
+			//System.Diagnostics.Debug.WriteLine("MainForm.OnMouseMove");
 
 			base.OnMouseMove(e);
 		}

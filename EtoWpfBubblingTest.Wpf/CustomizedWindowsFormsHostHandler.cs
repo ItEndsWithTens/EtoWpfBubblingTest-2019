@@ -153,6 +153,7 @@ namespace Eto.Wpf.Forms
 					WinFormsControl.KeyPress += WinFormsControl_KeyPress;
 					break;
 				case Eto.Forms.Control.KeyUpEvent:
+					Control.KeyUp += Control_KeyUp;
 					WinFormsControl.KeyUp += WinFormsControl_KeyUp;
 					break;
 				case TextControl.TextChangedEvent:
@@ -196,9 +197,20 @@ namespace Eto.Wpf.Forms
 
 		private void Control_KeyDown(object sender, swi.KeyEventArgs e)
 		{
+			System.Diagnostics.Debug.WriteLine("Control_KeyDown");
+
 			Keys keys = e.Key.ToEtoWithModifier(e.KeyboardDevice.Modifiers);
 
 			Callback.OnKeyDown(Widget, new KeyEventArgs(keys, KeyEventType.KeyDown));
+		}
+
+		private void Control_KeyUp(object sender, swi.KeyEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("Control_KeyUp");
+
+			Keys keys = e.Key.ToEtoWithModifier(e.KeyboardDevice.Modifiers);
+
+			Callback.OnKeyUp(Widget, new KeyEventArgs(keys, KeyEventType.KeyUp));
 		}
 
 		Keys key;
@@ -207,7 +219,7 @@ namespace Eto.Wpf.Forms
 		bool charPressed;
 		public Keys? LastKeyDown { get; set; }
 
-		void WinFormsControl_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		void WinFormsControl_KeyDown(object sender, swf.KeyEventArgs e)
 		{
 			charPressed = false;
 			handled = true;
@@ -235,7 +247,7 @@ namespace Eto.Wpf.Forms
 			LastKeyDown = null;
 		}
 
-		void WinFormsControl_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		void WinFormsControl_KeyPress(object sender, swf.KeyPressEventArgs e)
 		{
 			charPressed = true;
 			keyChar = e.KeyChar;
@@ -259,8 +271,7 @@ namespace Eto.Wpf.Forms
 				e.Handled = true;
 		}
 
-
-		void WinFormsControl_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+		void WinFormsControl_KeyUp(object sender, swf.KeyEventArgs e)
 		{
 			key = e.KeyData.ToEto();
 
@@ -356,7 +367,7 @@ namespace Eto.Wpf.Forms
 
 		void WinFormsControl_MouseMove(object sender, swf.MouseEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseMove");
+			//System.Diagnostics.Debug.WriteLine("WinFormsControl_MouseMove");
 
 			var args = new swi.MouseEventArgs(swi.InputManager.Current.PrimaryMouseDevice, Environment.TickCount)
 			{

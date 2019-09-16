@@ -63,12 +63,16 @@ namespace EtoWpfBubblingTest
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
-				System.Diagnostics.Debugger.Break();
-			}
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnKeyDown");
 
 			base.OnKeyDown(e);
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnKeyUp");
+
+			base.OnKeyUp(e);
 		}
 
 		bool dragging = false;
@@ -93,7 +97,7 @@ namespace EtoWpfBubblingTest
 		Random random = new Random();
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseMove");
+			//System.Diagnostics.Debug.WriteLine("NodeWindowsFormsHost.OnMouseMove");
 
 			base.OnMouseMove(e);
 
